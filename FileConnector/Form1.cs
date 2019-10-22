@@ -33,6 +33,7 @@ namespace FileConnector
             {
                 folder_path = folderBrowserDialog1.SelectedPath;
             }
+            label3.Text = folder_path;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -102,8 +103,6 @@ namespace FileConnector
 
                 //写入文件名
                 fs_dest.Write(file_name_buf, 0, file_name_buf.Length);
-
-
 
                 //换行
                 fs_dest.WriteByte((byte)13);
@@ -183,5 +182,38 @@ namespace FileConnector
                 label2.Text = dest_file;
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //添加到目标集中
+            listBox2.Items.Add(listBox1.SelectedItem);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //清空目标集
+            listBox2.Items.Clear();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //从目标集中移出
+            listBox2.Items.Remove(listBox2.SelectedItem);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //添加单个文件
+            openFileDialog1.Filter = "Only txt (*.txt)|*.txt";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.Multiselect = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string sFileName = openFileDialog1.FileName;
+                listBox2.Items.Add(sFileName);
+            }
+        }
+
     }
 }
